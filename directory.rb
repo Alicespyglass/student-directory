@@ -48,9 +48,14 @@ end
 
 # 3. Modify your program to only print the students
 # whose name is shorter than 12 characters.
-def print(students)
-  students.each_with_index do |student, index|
-    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+def print12(students)
+  puts "-------------"
+  puts "These students have names which is shorter than 12 characters"
+  students.each_with_index do |student, i|
+    if students[i][:name].delete(' ').length < 12 # delete white spaces, check length
+      puts "#{i + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+    else
+    end
   end
 end
 
@@ -66,4 +71,5 @@ students = input_students
 print_header
 print(students)
 print_if_letter(students, "A")
+print12(students)
 print_footer(students)
