@@ -59,6 +59,29 @@ def print12(students)
   end
 end
 
+# 4a. Rewrite the each() method that prints all students
+# using WHILE
+def print_while(students)
+  puts "-------------"
+  puts "Students by print_while"
+  i = 1   # set count (index)
+  while i <= students.count   # while count is <= length of array
+    puts "#{i}. #{students[i-1][:name]} (#{students[i-1][:cohort]} cohort)"
+    i += 1
+  end
+end
+
+# 4B. Rewrite the each() method that prints all students
+# using UNTIL
+def print_until(students)
+  puts "-------------"
+  puts "Students by print_until"
+  i = 1   # set count (index)
+  until i > students.count   # while count is <= length of array
+    puts "#{i}. #{students[i-1][:name]} (#{students[i-1][:cohort]} cohort)"
+    i += 1
+  end
+end
 
 def print_footer(names)
   puts "-------------"
@@ -72,4 +95,6 @@ print_header
 print(students)
 print_if_letter(students, "A")
 print12(students)
+print_while(students)
+print_until(students)
 print_footer(students)
