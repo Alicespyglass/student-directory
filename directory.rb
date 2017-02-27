@@ -34,22 +34,29 @@ end
 
 # 2. Modify your program to only print the students
 # whose name begins with a specific letter.
-# NB: answer prints itself out twice for some reason
-
 def print_if_letter(students, letter)
-  puts "These student(s)' names begin with the letter #{letter}"
-  students.each do |student| # This is an array of hashes
-    student.each do |name| # This is a hash
-      if student[:name].start_with?(letter)
-        puts "#{student[:name]} (#{student[:cohort]} cohort)"
-      else
-      end
+  puts "-------------"
+  puts "The following students have names beginning with the letter #{letter}:"
+  students.each_with_index do |student, i|
+    if students[i][:name].start_with?(letter) # i indexes loop through hash
+      puts "#{i + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+    else
     end
   end
 end
 
 
+# 3. Modify your program to only print the students
+# whose name is shorter than 12 characters.
+def print(students)
+  students.each_with_index do |student, index|
+    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+  end
+end
+
+
 def print_footer(names)
+  puts "-------------"
   puts "Overall, we have #{names.count} great students"
 end
 
