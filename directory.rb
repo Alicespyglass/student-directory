@@ -1,27 +1,42 @@
 # 5. Add more information: hobbies, country of birth,
 # height, etc.
+# 7a. Ask for name and cohort at the same time
+# 7b. Set default value for cohort if empty (March)
+# 7c. To convert to symbol, use .to_sym
 def input_students
   # create an empty array
   students = []
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice when asked for a new name"
   # get the first name
-  puts "What is their name?"
-  name = gets.chomp
+  puts "What is their name and cohort? (separated by a comma)"
+  input = gets.chomp.strip.split(",") # strip removes space at beg and end
+  name = input[0].capitalize
+  if input[1] != nil
+    cohort = input[1]
+  else
+    cohort = "March"
+  end
   # while the name is not empty, repeat this code
-  while !name.empty? do
+  while name != nil do
     puts "What is their hobby?"
-    hobby = gets.chomp
+    hobby = gets.chomp.to_sym
     puts "What is their country of birth?"
-    country = gets.chomp
+    country = gets.chomp.to_sym
     puts "What is their height?"
-    height = gets.chomp
+    height = gets.chomp.to_sym
     # add the student hash to the array
-    students << {name: name, cohort: :november, hobby: hobby, country: country, height: height}
+    students << {name: name, cohort: cohort, hobby: hobby, country: country, height: height}
     puts "Now we have #{students.count} students"
     # get another name from the user
-    puts "What is their name?"
-    name = gets.chomp
+    puts "What is their name and cohort?"
+    input = gets.chomp.split(",")
+    if input[1] != nil
+      cohort = input[1]
+    else
+      cohort = "March"
+    end
+    name = input[0]
   end
   # return the array of students
   students
@@ -37,7 +52,7 @@ end
 # 1. Students printed with ordinal number before name
 def print(students)
   students.each_with_index do |student, index|
-    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)".center(60)
+    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort, hobby: #{student[:hobby]}, country of birth: #{student[:country]}, height: #{student[:height]})".center(60)
   end
 end
 
