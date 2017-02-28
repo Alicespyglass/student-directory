@@ -37,7 +37,7 @@ end
 # 1. Students printed with ordinal number before name
 def print(students)
   students.each_with_index do |student, index|
-    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)".center(60)
   end
 end
 
@@ -49,7 +49,7 @@ def print_if_letter(students, letter)
   puts "The following students have names beginning with the letter #{letter}:"
   students.each_with_index do |student, i|
     if students[i][:name].start_with?(letter) # i indexes loop through hash
-      puts "#{i + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+      puts "#{i + 1}. #{student[:name]} (#{student[:cohort]} cohort)".center(60)
     else
     end
   end
@@ -63,7 +63,7 @@ def print12(students)
   puts "These students have names which is shorter than 12 characters"
   students.each_with_index do |student, i|
     if students[i][:name].delete(' ').length < 12 # delete white spaces, check length
-      puts "#{i + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+      puts "#{i + 1}. #{student[:name]} (#{student[:cohort]} cohort)".center(60)
     else
     end
   end
@@ -76,7 +76,7 @@ def print_while(students)
   puts "Students by print_while"
   i = 1   # set count (index)
   while i <= students.count   # while count is <= length of array
-    puts "#{i}. #{students[i-1][:name]} (#{students[i-1][:cohort]} cohort)"
+    puts "#{i}. #{students[i-1][:name]} (#{students[i-1][:cohort]} cohort)".center(60)
     i += 1
   end
 end
@@ -88,7 +88,8 @@ def print_until(students)
   puts "Students by print_until"
   i = 1   # set count (index)
   until i > students.count   # while count is <= length of array
-    puts "#{i}. #{students[i-1][:name]} (#{students[i-1][:cohort]} cohort)"
+    output = "#{i}. #{students[i-1][:name]} (#{students[i-1][:cohort]} cohort)"
+    puts output.center(60)
     i += 1
   end
 end
@@ -100,7 +101,7 @@ end
 
 
 # nothing happens until we call the methods
-students2 = input_students2
+students = input_students
 print_header
 print(students)
 print_if_letter(students, "A")
