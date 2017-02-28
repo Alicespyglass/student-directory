@@ -1,16 +1,26 @@
+# 5. Add more information: hobbies, country of birth,
+# height, etc.
 def input_students
-  puts "Please enter the names of the students"
-  puts "To finish, just hit return twice"
   # create an empty array
   students = []
+  puts "Please enter the names of the students"
+  puts "To finish, just hit return twice when asked for a new name"
   # get the first name
+  puts "What is their name?"
   name = gets.chomp
   # while the name is not empty, repeat this code
   while !name.empty? do
+    puts "What is their hobby?"
+    hobby = gets.chomp
+    puts "What is their country of birth?"
+    country = gets.chomp
+    puts "What is their height?"
+    height = gets.chomp
     # add the student hash to the array
-    students << {name: name, cohort: :november}
+    students << {name: name, cohort: :november, hobby: hobby, country: country, height: height}
     puts "Now we have #{students.count} students"
     # get another name from the user
+    puts "What is their name?"
     name = gets.chomp
   end
   # return the array of students
@@ -90,7 +100,7 @@ end
 
 
 # nothing happens until we call the methods
-students = input_students
+students2 = input_students2
 print_header
 print(students)
 print_if_letter(students, "A")
