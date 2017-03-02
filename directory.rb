@@ -108,10 +108,14 @@ def print12(students)
   end
 end
 
-
+# 9. Student(s) messeage based on number
 def print_footer(student)
   puts "-------------"
-  puts "Overall, we have #{student.count} great students"
+  if student.count > 1
+    puts "Now we have #{student.count} great students."
+  else
+    puts "Now we have #{student.count} great student."
+  end
 end
 
 
