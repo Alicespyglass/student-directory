@@ -9,10 +9,10 @@ end
 # an input
 def name_cohort
   puts "What is the student name and their cohort? (separated by a comma, please write out full month)"
-  input = gets.chomp.strip.split(",") # strip removes space at beg and end
+  input = gets.chomp.strip.split(", ") # strip removes space at beg and end
   @name = input[0].capitalize
     if input[1] != nil
-     @cohort = input[1]
+     @cohort = input[1].capitalize
     else
       @cohort = "March"
     end
@@ -115,8 +115,27 @@ def print_footer(student)
 end
 
 
+def cohort_print(cohortm)
+  @students.each do |student|
+     if student[:cohort] == cohortm
+      puts "#{student[:name]}, #{student[:cohort]} cohort."
+     end
+  end
+end
+
+
+def cohort_pick(students)
+  coharr = students.map{ |student| student[:cohort]}.uniq
+  puts "Which of the following cohort would you like to see the students for?"
+  puts coharr
+  cohortm = gets.chomp.capitalize
+  cohort_print(cohortm)
+end
+
+
 input_students
 print(@students)
 print_if_letter(@students, "A")
-print_footer(@students)
 print12(@students)
+print_footer(@students)
+cohort_pick(@students)
