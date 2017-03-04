@@ -10,9 +10,9 @@ end
 def name_cohort
   puts "What is the student name and their cohort? (separated by a comma, please write out full month)"
   input = gets.chomp.strip.split(", ") # strip removes space at beg and end
-  @name = input[0].capitalize
+  @name = input[0]
     if input[1] != nil
-     @cohort = input[1].capitalize
+     @cohort = input[1]
     else
       @cohort = "March"
     end
@@ -53,7 +53,7 @@ end
 # new student - if no, move to print header
 def newstudent
   puts "Would you like to add a new student? (Y/N)"
-  answer = gets.chomp.capitalize
+  answer = gets.chomp
   if answer == "Y"
     input_students
   else print_header
@@ -73,10 +73,17 @@ def check
   newstudent
 end
 
+
 # 1. Students printed with ordinal number before name
-def print(students)
-  students.each_with_index do |student, index|
-    puts "#{index + 1}. #{student[:name]}, #{student[:name]} cohort, hobby: #{student[:hobby]}, place of birth: #{student[:country]}, #{student[:height]} tall."
+# 12. Only print if not an empty list
+def print_name(students)
+  if students[0][:name] != nil
+    students.each_with_index do |student, index|
+      puts "#{index + 1}. #{student[:name]}, #{student[:name]} cohort, hobby: #{student[:hobby]}, place of birth: #{student[:country]}, #{student[:height]} tall."
+    end
+  else
+    puts "There are currently no students in the directory."
+    exit(0)
   end
 end
 
@@ -132,13 +139,13 @@ def cohort_pick(students)
   coharr = students.map{ |student| student[:cohort]}.uniq
   puts "Which of the following cohort would you like to see the students for?"
   puts coharr
-  cohortm = gets.chomp.capitalize
+  cohortm = gets.chomp
   cohort_print(cohortm)
 end
 
 
 input_students
-print(@students)
+print_name(@students)
 print_if_letter(@students, "A")
 print12(@students)
 print_footer(@students)
