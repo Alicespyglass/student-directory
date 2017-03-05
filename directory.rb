@@ -4,7 +4,7 @@
 def interactive_menu
   loop do
     print_menu
-    process(gets.chomp)
+    process(STDIN.gets.chomp)
   end
 end
 
@@ -66,21 +66,21 @@ end
 # an input
 def hobby
   puts "What is their hobby?"
-  @hobby = gets.chomp
+  @hobby = STDIN.gets.chomp
 end
 
 
 # an input
 def country
   puts "What is their country of birth?"
-  @country = gets.chomp
+  @country = STDIN.gets.chomp
 end
 
 
 # an input
 def height
   puts "What is their height?"
-  @height = gets.chomp
+  @height = STDIN.gets.chomp
 end
 
 
@@ -97,7 +97,7 @@ end
 # new student - if no, move to print header
 def newstudent
   puts "Would you like to add a new student? (Y/N)"
-  answer = gets.chomp.capitalize
+  answer = STDIN.gets.chomp.capitalize
   if answer == "Y"
     input_students
   else interactive_menu
@@ -109,7 +109,7 @@ end
 def check
   puts "#{@name}, #{@cohort}"
   puts "Is this correct? (Y/N to redo)"
-  answer = gets.chomp.capitalize
+  answer = STDIN.gets.chomp.capitalize
     if answer == "Y"
       @students << {name: @name, cohort: @cohort} #, hobby: @hobby, country: @country, height: @height}
     else input_students
@@ -155,8 +155,8 @@ def save_students
   file.close
 end
 
-def load_students
-  file = File.open("students.csv", "r")
+def load_students(filename = "students.csv")
+  file = File.open(filename, "r")
   file.readlines.each do |line|
     name, cohort = line.chomp.split(',')
       @students << {name: name, cohort: cohort.to_sym}
@@ -164,4 +164,17 @@ def load_students
   file.close
 end
 
+def try_load_students
+  filename = ARGV.first # first argument from the command line
+  return if filename.nil? # get out of the method if it isn't given
+  if File.exists?(filename) # if it exists
+    load_students(filename)
+    puts "Loaded #{@students.count} from #{filename}"
+  else # if it doesn't exist
+    puts "Sorry, #{filename} doesn't exist."
+    exit # quit the program
+  end
+end
+
+try_load_students
 interactive_menu
