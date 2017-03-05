@@ -1,5 +1,43 @@
 @students = []
 
+# Interactive Menu
+def interactive_menu
+  loop do
+    print_menu
+    process(gets.chomp)
+  end
+end
+
+
+# 1. print the menu and ask the user what to do
+def print_menu
+  puts "1. Input the students"
+  puts "2. Show the students"
+  puts "9. Exit"
+end
+
+
+def show_students
+  print_header
+  print_name(@students)
+  print_footer(@students)
+end
+
+
+def process(selection)
+  case selection
+  when "1"
+    input_students
+  when "2"
+    show_students
+  when "9"
+    exit
+  else
+    puts "I don't know what you meant, try again?"
+  end
+end
+
+
 # header
 def print_header
   puts "The students of Enders Academy"
@@ -53,10 +91,10 @@ end
 # new student - if no, move to print header
 def newstudent
   puts "Would you like to add a new student? (Y/N)"
-  answer = gets.chomp
+  answer = gets.chomp.capitalize
   if answer == "Y"
     input_students
-  else print_header
+  else interactive_menu
   end
 end
 
@@ -88,33 +126,6 @@ def print_name(students)
 end
 
 
-# 2. Modify your program to only print the students
-# whose name begins with a specific letter.
-def print_if_letter(students, letter)
-  puts "-------------"
-  puts "The following students have names beginning with the letter #{letter}:"
-  students.each_with_index do |student, i|
-    if students[i][:name].start_with?(letter) # i indexes loop through hash
-      puts "#{i + 1}. #{student[:name]} (#{student[:cohort]} cohort)".center(60)
-    else
-    end
-  end
-end
-
-
-# 3. Modify your program to only print the students
-# whose name is shorter than 12 characters.
-def print12(students)
-  puts "-------------"
-  puts "These students have names which is shorter than 12 characters"
-  students.each_with_index do |student, i|
-    if students[i][:name].delete(' ').length < 12 # delete white spaces, check length
-      puts "#{i + 1}. #{student[:name]} (#{student[:cohort]} cohort)".center(60)
-    else
-    end
-  end
-end
-
 # 9. Student(s) messeage based on number
 def print_footer(student)
   puts "-------------"
@@ -125,28 +136,4 @@ def print_footer(student)
   end
 end
 
-
-def cohort_print(cohortm)
-  @students.each do |student|
-     if student[:cohort] == cohortm
-      puts "#{student[:name]}, #{student[:cohort]} cohort."
-     end
-  end
-end
-
-
-def cohort_pick(students)
-  coharr = students.map{ |student| student[:cohort]}.uniq
-  puts "Which of the following cohort would you like to see the students for?"
-  puts coharr
-  cohortm = gets.chomp
-  cohort_print(cohortm)
-end
-
-
-input_students
-print_name(@students)
-print_if_letter(@students, "A")
-print12(@students)
-print_footer(@students)
-cohort_pick(@students)
+interactive_menu
